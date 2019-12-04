@@ -27,13 +27,13 @@
               "id": "da331dae-b984-4a42-8e50-2b9e044e8946",
               "z": 2,
               "hasOpenThreats": false,
-              "outOfScope": true,
+              "outOfScope": false,
               "attrs": {
                 ".element-shape": {
-                  "class": "element-shape hasNoOpenThreats isOutOfScope"
+                  "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
-                  "text": "End user/Resource\nowner"
+                  "text": "End user"
                 },
                 ".element-text": {
                   "class": "element-text hasNoOpenThreats isInScope"
@@ -54,12 +54,68 @@
               "id": "cfbb49af-4955-4e67-9aad-a55e25b033b1",
               "z": 5,
               "hasOpenThreats": false,
+              "threats": [
+                {
+                  "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
+                  "title": "Open Redirectors on Client",
+                  "type": "Spoofing",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "An open redirector is an endpoint using a parameter to automatically redirect a user agent to the location specified by the parameter value without any validation.  If the authorization server allows the client to register only part of the redirect URI, an attacker can use an open redirector operated by the client to construct a redirect URI that will pass the authorization server validation but will send the authorization \"code\" or access token to an endpoint under the control of the attacker.",
+                  "mitigation": "Require clients to register full redirect URI"
+                },
+                {
+                  "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
+                  "title": "Malicious Client Obtains Authorization",
+                  "type": "Information disclosure",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "description": "A malicious client could attempt to obtain information by fraud.",
+                  "mitigation": "1. The Routing server should authenticate the client\n2. The authorization server should validate the client's redirect URI against the pre-registered redirect URI."
+                },
+                {
+                  "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
+                  "title": "Obtaining User Secrets on Transport",
+                  "type": "Information disclosure",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "An attacker could attempt to eavesdrop the transmission of end-user secret between the client and server.",
+                  "mitigation": "1. Use of TLS mode for transportation"
+                },
+                {
+                  "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
+                  "title": "Replay of Authorized Resource Server Requests",
+                  "type": "Tampering",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "description": "An attacker could attempt to replay valid requests in order to obtain or to modify/destroy user data.",
+                  "mitigation": "1. The resource server should utilize transport security measures (e.g., TLS) in order to prevent such attacks. This would prevent the attacker from capturing valid requests.\n2. Alternatively, the resource server could employ signed requests along with nonces and timestamps in order to uniquely identify requests."
+                },
+                {
+                  "ruleId": "edb05d76-a695-455f-947b-7d67b78bc31d",
+                  "title": "DDoS Attacks for the exhaustion of Resources",
+                  "type": "Denial of service",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "Targeting the Servers for multiple requests and exhausting the request parameter.",
+                  "mitigation": "1. Utilizing high entropy for the request parameters."
+                },
+                {
+                  "ruleId": "c1377855-ea20-4c97-8861-f95c364fb8d2",
+                  "title": "Change in Scope Values",
+                  "type": "Elevation of privilege",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "The Client may add more scope information in order to increase the information access.",
+                  "mitigation": "1. While registration define the maximum scope acceptable."
+                }
+              ],
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
-                  "text": "Authorization\nserver"
+                  "text": "Routing server"
                 },
                 ".element-text": {
                   "class": "element-text hasNoOpenThreats isInScope"
@@ -73,8 +129,8 @@
                 "height": 100
               },
               "position": {
-                "x": 437,
-                "y": 171
+                "x": 500,
+                "y": 12
               },
               "angle": 0,
               "id": "997ca320-aab5-4f9f-a336-474b5d00a29e",
@@ -85,7 +141,7 @@
                   "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
-                  "text": "Client - OAuth\nPlayground"
+                  "text": "Client App"
                 },
                 ".element-text": {
                   "class": "element-text hasNoOpenThreats isInScope"
@@ -105,12 +161,12 @@
               },
               "vertices": [
                 {
-                  "x": 364,
-                  "y": 164
+                  "x": 381,
+                  "y": 157
                 },
                 {
                   "x": 376,
-                  "y": 254
+                  "y": 298
                 }
               ],
               "id": "2ee874fc-a265-4b94-88ae-30f115d1c77a",
@@ -121,17 +177,17 @@
               "type": "tm.Boundary",
               "smooth": true,
               "source": {
-                "x": 834,
-                "y": 14
+                "x": 843,
+                "y": 45
               },
               "target": {
-                "x": 804,
-                "y": 406
+                "x": 846,
+                "y": 404
               },
               "vertices": [
                 {
-                  "x": 736,
-                  "y": 235
+                  "x": 727,
+                  "y": 216
                 }
               ],
               "id": "2988ab6c-33ab-43d6-91c3-87910cf28f61",
@@ -139,245 +195,20 @@
               "attrs": {}
             },
             {
-              "type": "tm.Flow",
-              "smooth": true,
-              "source": {
-                "x": 241,
-                "y": 254
-              },
-              "target": {
-                "id": "997ca320-aab5-4f9f-a336-474b5d00a29e"
-              },
-              "vertices": [
-                {
-                  "x": 364,
-                  "y": 318
-                }
-              ],
-              "id": "041ace7d-e41e-47a6-a17e-9667fe18e423",
-              "labels": [
-                {
-                  "position": 0.5,
-                  "attrs": {
-                    "text": {
-                      "text": "1. Login with Google",
-                      "font-weight": "400",
-                      "font-size": "small"
-                    }
-                  }
-                }
-              ],
-              "z": 9,
-              "hasOpenThreats": false,
-              "attrs": {
-                ".marker-target": {
-                  "class": "marker-target hasNoOpenThreats isInScope"
-                },
-                ".connection": {
-                  "class": "connection hasNoOpenThreats isInScope"
-                }
-              }
-            },
-            {
-              "type": "tm.Flow",
-              "smooth": true,
-              "source": {
-                "id": "997ca320-aab5-4f9f-a336-474b5d00a29e"
-              },
-              "target": {
-                "id": "cfbb49af-4955-4e67-9aad-a55e25b033b1"
-              },
-              "vertices": [],
-              "id": "990f236f-94cf-4389-8767-ebbf02d83708",
-              "labels": [
-                {
-                  "position": 0.5,
-                  "attrs": {
-                    "text": {
-                      "text": "2. Redirect to\nAuthroization server",
-                      "font-weight": "400",
-                      "font-size": "small"
-                    }
-                  }
-                }
-              ],
-              "z": 10,
-              "hasOpenThreats": true,
-              "protocol": "HTTPS",
-              "isEncrypted": true,
-              "isPublicNetwork": true,
-              "threats": [
-                {
-                  "status": "Open",
-                  "severity": "High",
-                  "title": "Open Redirectors on Client",
-                  "mitigation": "Validate Pre-Registered \"redirect_uri\".\nAn authorization server should require all clients to register their \"redirect_uri\", and the \"redirect_uri\" should be the full URI. every actual redirect URI sent with the respective \"client_id\" to the end-user authorization endpoint must match the registered redirect URI.",
-                  "type": "Tampering",
-                  "description": "If the authorization server allows the client to register only part of the redirect URI, an attacker can use an open redirector operated by the client to construct a redirect URI that will pass the authorization server validation but will send the    authorization \"code\" or access token to an endpoint under the control of the attacker.\nImpact: An attacker could gain access to authorization \"codes\" or  access tokens."
-                }
-              ],
-              "attrs": {
-                ".marker-target": {
-                  "class": "marker-target hasOpenThreats isInScope"
-                },
-                ".connection": {
-                  "class": "connection hasOpenThreats isInScope"
-                }
-              }
-            },
-            {
-              "type": "tm.Flow",
-              "smooth": true,
-              "source": {
-                "id": "cfbb49af-4955-4e67-9aad-a55e25b033b1"
-              },
-              "target": {
-                "id": "da331dae-b984-4a42-8e50-2b9e044e8946"
-              },
-              "vertices": [
-                {
-                  "x": 580,
-                  "y": 28
-                }
-              ],
-              "id": "caffd99e-d374-4abe-b141-5566ae4fa5aa",
-              "labels": [
-                {
-                  "position": {
-                    "distance": 0.5024577585060077,
-                    "offset": 14.061286219221074
-                  },
-                  "attrs": {
-                    "text": {
-                      "text": "3. Request consent\nfrom user",
-                      "font-weight": "400",
-                      "font-size": "small"
-                    }
-                  }
-                }
-              ],
-              "z": 11,
-              "hasOpenThreats": false,
-              "isEncrypted": true,
-              "isPublicNetwork": true,
-              "protocol": "HTTPS",
-              "attrs": {
-                ".marker-target": {
-                  "class": "marker-target hasNoOpenThreats isInScope"
-                },
-                ".connection": {
-                  "class": "connection hasNoOpenThreats isInScope"
-                }
-              }
-            },
-            {
-              "type": "tm.Flow",
-              "smooth": true,
-              "source": {
-                "id": "cfbb49af-4955-4e67-9aad-a55e25b033b1"
-              },
-              "target": {
-                "id": "997ca320-aab5-4f9f-a336-474b5d00a29e"
-              },
-              "vertices": [
-                {
-                  "x": 669,
-                  "y": 386
-                }
-              ],
-              "id": "316e431f-9db9-4a91-8e83-13183505a6e2",
-              "labels": [
-                {
-                  "position": 0.5,
-                  "attrs": {
-                    "text": {
-                      "text": "5. Redirect URI with\nauthorization code",
-                      "font-weight": "400",
-                      "font-size": "small"
-                    }
-                  }
-                }
-              ],
-              "z": 12,
-              "hasOpenThreats": true,
-              "threats": [
-                {
-                  "status": "Open",
-                  "severity": "High",
-                  "title": "Impersonating attack using unvalidated ID Token",
-                  "type": "Spoofing",
-                  "description": "Validate ID token received from the authorization server to ensure ID token is indeed received  from the right source or not tampered. \n\nImpact: A malicious attacker can impersonate his request to the client application and get resources from your application on behalf of the victim.",
-                  "mitigation": "Validation of the ID token:\nVerify that the ID token is properly signed by the issuer using one of the certificates found at the URI specified. \nVerify that the value of iss in the ID token is equal to the authorization server's endpoint. \nVerify that the value of aud in the ID token is equal to your app’s client ID.\nVerify that the expiry time (exp) of the ID token has not passed."
-                }
-              ],
-              "attrs": {
-                ".marker-target": {
-                  "class": "marker-target hasOpenThreats isInScope"
-                },
-                ".connection": {
-                  "class": "connection hasOpenThreats isInScope"
-                }
-              }
-            },
-            {
-              "type": "tm.Flow",
-              "smooth": true,
-              "source": {
-                "x": 319,
-                "y": 178
-              },
-              "target": {
-                "x": 808,
-                "y": 191
-              },
-              "vertices": [
-                {
-                  "x": 568,
-                  "y": 80
-                }
-              ],
-              "id": "e9e78506-9205-4c92-9a5e-084a5813d938",
-              "labels": [
-                {
-                  "position": {
-                    "distance": 0.5176964917688603,
-                    "offset": 19.939146175980568
-                  },
-                  "attrs": {
-                    "text": {
-                      "text": "4. Grant access",
-                      "font-weight": "400",
-                      "font-size": "small"
-                    }
-                  }
-                }
-              ],
-              "z": 13,
-              "hasOpenThreats": false,
-              "attrs": {
-                ".marker-target": {
-                  "class": "marker-target hasNoOpenThreats isInScope"
-                },
-                ".connection": {
-                  "class": "connection hasNoOpenThreats isInScope"
-                }
-              }
-            },
-            {
               "type": "tm.Boundary",
               "smooth": true,
               "source": {
-                "x": 351,
-                "y": 559
+                "x": 385,
+                "y": 439
               },
               "target": {
-                "x": 804,
-                "y": 565
+                "x": 751,
+                "y": 432
               },
               "vertices": [
                 {
-                  "x": 573,
-                  "y": 514
+                  "x": 559,
+                  "y": 396
                 }
               ],
               "id": "9e1299d0-9f14-4b06-8d1c-5ae481ad0818",
@@ -385,25 +216,46 @@
               "attrs": {}
             },
             {
-              "type": "tm.Process",
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 383,
+                "y": 57
+              },
+              "target": {
+                "x": 759,
+                "y": 56
+              },
+              "vertices": [
+                {
+                  "x": 553,
+                  "y": 161
+                }
+              ],
+              "id": "718bc09d-4f95-4c34-9a03-74d7360fa650",
+              "z": 17,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Actor",
               "size": {
-                "width": 100,
-                "height": 100
+                "width": 160,
+                "height": 80
               },
               "position": {
-                "x": 511,
-                "y": 584
+                "x": 487,
+                "y": 459
               },
               "angle": 0,
-              "id": "766e6927-454a-436c-88ed-33ac55136d50",
-              "z": 16,
+              "id": "9a1060a8-ac9f-4db3-af9e-d6465f0cba39",
+              "z": 18,
               "hasOpenThreats": false,
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
-                  "text": "Resource\nserver"
+                  "text": "Users Trusted Device/\nAuthorization Server"
                 },
                 ".element-text": {
                   "class": "element-text hasNoOpenThreats isInScope"
@@ -414,53 +266,35 @@
               "type": "tm.Flow",
               "smooth": true,
               "source": {
-                "id": "997ca320-aab5-4f9f-a336-474b5d00a29e"
+                "x": 318,
+                "y": 193
               },
               "target": {
-                "id": "cfbb49af-4955-4e67-9aad-a55e25b033b1"
+                "x": 507,
+                "y": 91
               },
-              "vertices": [
-                {
-                  "x": 676,
-                  "y": 156
-                }
-              ],
-              "id": "fc3349ea-e2d7-463c-9d82-299ea5714dd7",
+              "vertices": [],
+              "id": "2d681d72-23d9-4c76-9ee1-64a4714ce8d5",
               "labels": [
                 {
-                  "position": {
-                    "distance": 0.3214625569676272,
-                    "offset": -12.933573520276695
-                  },
+                  "position": 0.5,
                   "attrs": {
                     "text": {
-                      "text": "6.(bi-directional) Get-\naccess-token-and-id-t\noken",
+                      "text": "1. Login With Dev\nAuth",
                       "font-weight": "400",
                       "font-size": "small"
                     }
                   }
                 }
               ],
-              "z": 17,
-              "hasOpenThreats": true,
-              "isEncrypted": true,
-              "protocol": "HTTPS",
-              "threats": [
-                {
-                  "status": "Open",
-                  "severity": "High",
-                  "title": "CSRF attack against redirect URI",
-                  "type": "Spoofing",
-                  "description": "CSRF attacks  on OAuth approvals can allow an attacker to obtain authorization to  OAuth protected resources without the consent of the user.  This attack works against the redirect URI used in the authorization    \"code\" flow.  An attacker could authorize an authorization \"code\" to  their own protected resources on an authorization server.  He then  aborts the redirect flow back to the client on his device and tricks  the victim into executing the redirect back to the client.  The  client receives the redirect, fetches the token(s) from the    authorization server, and associates the victim's client session with  the resources accessible using the token.\n Impact: The user accesses resources on behalf of the attacker.  The effective impact depends on the type of resource accessed.  For example, the user may upload private items to an attacker's  resources.",
-                  "mitigation": "The first step is creating a unique session token that holds state between your app and the user's client. You later match this unique session token with the \n authentication response returned by the authorization server to verify that the user is making the request and not a malicious attacker."
-                }
-              ],
+              "z": 19,
+              "hasOpenThreats": false,
               "attrs": {
                 ".marker-target": {
-                  "class": "marker-target hasOpenThreats isInScope"
+                  "class": "marker-target hasNoOpenThreats isInScope"
                 },
                 ".connection": {
-                  "class": "connection hasOpenThreats isInScope"
+                  "class": "connection hasNoOpenThreats isInScope"
                 }
               }
             },
@@ -468,35 +302,184 @@
               "type": "tm.Flow",
               "smooth": true,
               "source": {
-                "id": "997ca320-aab5-4f9f-a336-474b5d00a29e"
+                "x": 591,
+                "y": 92
               },
               "target": {
-                "id": "766e6927-454a-436c-88ed-33ac55136d50"
+                "x": 819,
+                "y": 188
               },
-              "vertices": [
-                {
-                  "x": 491,
-                  "y": 418
-                }
-              ],
-              "id": "08266558-516d-4c7c-b338-6a3794dbeaf6",
+              "vertices": [],
+              "id": "e96676a6-c453-445a-b295-e77a6260ead3",
               "labels": [
                 {
-                  "position": {
-                    "distance": 0.41369372388278663,
-                    "offset": 27.431549503002316
-                  },
+                  "position": 0.5,
                   "attrs": {
                     "text": {
-                      "text": "7. request resources\nusing access token",
+                      "text": "2. Redirect To\nRouting Server",
                       "font-weight": "400",
                       "font-size": "small"
                     }
                   }
                 }
               ],
-              "z": 18,
+              "z": 20,
               "hasOpenThreats": false,
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "protocol": "HTTPS",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "x": 803,
+                "y": 216
+              },
+              "target": {
+                "x": 323,
+                "y": 220
+              },
+              "vertices": [],
+              "id": "f80665a9-7c77-4776-9a57-4fce52f3352f",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "3. Authentication\nRequest",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 21,
+              "hasOpenThreats": false,
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "protocol": "HTTPS",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "x": 551,
+                "y": 457
+              },
+              "target": {
+                "x": 547,
+                "y": 113
+              },
+              "vertices": [],
+              "id": "60099d5e-f0ca-4eb7-a5e7-b73adc9fa82e",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "6. Request Grant\nResponse",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 23,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "x": 832,
+                "y": 271
+              },
+              "target": {
+                "id": "9a1060a8-ac9f-4db3-af9e-d6465f0cba39"
+              },
+              "vertices": [],
+              "id": "102fb59d-64aa-48a9-94ff-cab3f2481977",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "5. Client Request\nRedirect",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 24,
+              "hasOpenThreats": false,
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "protocol": "HTTPS",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "x": 319,
+                "y": 243
+              },
+              "target": {
+                "x": 808,
+                "y": 245
+              },
+              "vertices": [],
+              "id": "abe02f81-0342-479b-84ed-64e8e4fb4339",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "4. Authentication\nResponse",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 25,
+              "hasOpenThreats": false,
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "protocol": "HTTPS",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
