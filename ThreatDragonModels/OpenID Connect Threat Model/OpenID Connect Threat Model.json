@@ -8,7 +8,7 @@
     "contributors": [],
     "diagrams": [
       {
-        "title": "OpenID Connect",
+        "title": "DevAuth",
         "thumbnail": "./public/content/images/thumbnail.jpg",
         "id": 0,
         "diagramJson": {
